@@ -16,23 +16,24 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import cafe.adriel.voyager.core.screen.Screen
-import com.example.domain.models.Contact
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.contact.R
 import com.example.contact.ui.contact.add.AddContactScreen
+import com.example.domain.models.Contact
 import kotlinx.coroutines.launch
 
 object ContactScreen : Screen {
@@ -56,12 +57,14 @@ object ContactScreen : Screen {
                 is MainState.Loading -> {
                     showProgressBar = true
                 }
+
                 is MainState.AddContact -> {}
                 is MainState.Contacts -> {
                     showProgressBar = false
                     list.clear()
                     list.addAll((state as MainState.Contacts).contacts.shuffled())
                 }
+
                 is MainState.DeleteContact -> {}
                 is MainState.DeleteContacts -> {}
                 is MainState.UpdateContact -> {}
@@ -87,8 +90,11 @@ object ContactScreen : Screen {
                         modifier = Modifier
                             .fillMaxSize()
                             .animateContentSize(),
-                        contentPadding = PaddingValues(vertical = 10.dp, horizontal = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(
+                            vertical = dimensionResource(id = R.dimen.middle),
+                            horizontal = dimensionResource(id = R.dimen.middle)
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small)),
                     ) {
                         items(list.size) { position ->
                             val item = list[position]
@@ -105,7 +111,6 @@ object ContactScreen : Screen {
                                         name = item.name,
                                         phoneNumber = item.phoneNumber
                                     )
-                                    Log.e("TAG", "Content: $contact", )
                                     navigation.push(
                                         AddContactScreen(
                                             contact,

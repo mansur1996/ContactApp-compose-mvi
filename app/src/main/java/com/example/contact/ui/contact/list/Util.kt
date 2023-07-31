@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -39,7 +40,7 @@ fun AppBar(onClick: () -> Unit) {
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
             .height(56.dp)
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = dimensionResource(id = R.dimen.standard)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
 
@@ -76,7 +77,10 @@ fun ListItem(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 10.dp, vertical = 5.dp),
+                .padding(
+                    dimensionResource(id = R.dimen.middle),
+                    vertical = dimensionResource(id = R.dimen.small)
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(modifier = Modifier.weight(1f)) {
@@ -103,7 +107,7 @@ fun ListItem(
                         imageVector = Icons.Default.Edit,
                         contentDescription = null,
                         tint = Color.DarkGray,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
                     )
                 }
             }
@@ -113,7 +117,7 @@ fun ListItem(
                         imageVector = Icons.Default.Delete,
                         contentDescription = null,
                         tint = Color.DarkGray,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size))
                     )
                 }
             }

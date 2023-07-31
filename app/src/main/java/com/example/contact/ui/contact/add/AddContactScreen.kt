@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,10 +42,11 @@ data class AddContactScreen(val contact: Contact? = null, val isAdd : Boolean = 
             }
         }
 
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.standard))) {
             MyNameTextField(text = name, hint = "Full Name")
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.standard)))
             MyPhoneTextField(text = phoneNumber,  hint = "Phone Number")
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.standard)))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {

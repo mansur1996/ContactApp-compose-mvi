@@ -8,17 +8,17 @@ import com.example.data.local.enteties.ContactEntity
 interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertContact(contact: ContactEntity)
+    fun insertContact(contact: ContactEntity)
 
     @Query("SELECT * FROM contacts")
-    suspend fun getContacts(): List<ContactEntity>
+    fun getContacts(): List<ContactEntity>
 
     @Delete
-    suspend fun deleteContact(contact: ContactEntity)
+    fun deleteContact(contact: ContactEntity)
 
     @Query("DELETE FROM contacts")
-    suspend fun deleteContacts()
+    fun deleteContacts()
 
     @Update
-    suspend fun updateContact(contact: ContactEntity)
+    fun updateContact(contact: ContactEntity)
 }
