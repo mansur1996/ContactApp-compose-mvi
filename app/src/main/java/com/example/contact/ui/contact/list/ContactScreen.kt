@@ -1,6 +1,5 @@
 package com.example.contact.ui.contact.list
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
@@ -44,7 +43,7 @@ object ContactScreen : Screen {
         val navigation = LocalNavigator.currentOrThrow
         val context = LocalContext.current
         val viewModel = hiltViewModel<ContactViewModel>()
-        var list = remember { mutableStateListOf<Contact>() }
+        val contacts = remember { mutableStateListOf<Contact>() }
         var showProgressBar by remember { mutableStateOf(true) }
         val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -61,8 +60,8 @@ object ContactScreen : Screen {
                 is MainState.AddContact -> {}
                 is MainState.Contacts -> {
                     showProgressBar = false
-                    list.clear()
-                    list.addAll((state as MainState.Contacts).contacts.shuffled())
+                    contacts.clear()
+                    contacts.addAll((state as MainState.Contacts).contacts.shuffled())
                 }
 
                 is MainState.DeleteContact -> {}
@@ -96,27 +95,22 @@ object ContactScreen : Screen {
                         ),
                         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small)),
                     ) {
-                        items(list.size) { position ->
-                            val item = list[position]
+                        items(contacts.size) { position ->
+                            val contactItem = contacts[position]
                             ListItem(
-                                item = item,
-                                deleteClick = {
-                                    scope.launch {
-                                        viewModel.userIntent.send(MainIntent.DeleteContact(item))
-                                    }
-                                },
+                                item = contactItem,
                                 editClick = {
-                                    val contact = Contact(
-                                        id = item.id,
-                                        name = item.name,
-                                        phoneNumber = item.phoneNumber
-                                    )
                                     navigation.push(
                                         AddContactScreen(
-                                            contact,
+                                            contactItem,
                                             isAdd = false
                                         )
                                     )
+                                },
+                                deleteClick = {
+                                    scope.launch {
+                                        viewModel.userIntent.send(MainIntent.DeleteContact(contactItem))
+                                    }
                                 })
                         }
                     }

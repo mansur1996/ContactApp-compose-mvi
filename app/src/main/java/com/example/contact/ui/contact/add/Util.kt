@@ -17,8 +17,8 @@ fun MyNameTextField(text: MutableState<String>, hint: String) {
         modifier = Modifier.fillMaxWidth(),
         value = text.value,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        onValueChange = { text.value = it },
-        placeholder = { Text(hint) }
+        onValueChange = { if (it.length < 26) text.value = it },
+        placeholder = { Text(hint) },
     )
 }
 
@@ -29,7 +29,7 @@ fun MyPhoneTextField(text: MutableState<String>, hint: String) {
         modifier = Modifier.fillMaxWidth(),
         value = text.value,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-        onValueChange = { text.value = it },
+        onValueChange = { if (it.length < 14) text.value = it },
         placeholder = { Text(hint) }
     )
 }

@@ -35,7 +35,7 @@ import com.example.contact.R
 import com.example.domain.models.Contact
 
 @Composable
-fun AppBar(onClick: () -> Unit) {
+fun AppBar(function: () -> Unit) {
     Row(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
@@ -43,7 +43,6 @@ fun AppBar(onClick: () -> Unit) {
             .padding(horizontal = dimensionResource(id = R.dimen.standard)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-
         Text(
             text = stringResource(R.string.app_name),
             style = TextStyle(
@@ -52,7 +51,7 @@ fun AppBar(onClick: () -> Unit) {
             )
         )
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = onClick) {
+        IconButton(onClick = function) {
             Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = null,
@@ -78,7 +77,7 @@ fun ListItem(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    dimensionResource(id = R.dimen.middle),
+                    horizontal = dimensionResource(id = R.dimen.middle),
                     vertical = dimensionResource(id = R.dimen.small)
                 ),
             verticalAlignment = Alignment.CenterVertically

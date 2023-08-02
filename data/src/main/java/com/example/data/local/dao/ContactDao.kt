@@ -11,7 +11,7 @@ interface ContactDao {
     fun insertContact(contact: ContactEntity)
 
     @Query("SELECT * FROM contacts")
-    fun getContacts(): List<ContactEntity>
+    suspend fun getContacts(): List<ContactEntity>
 
     @Delete
     fun deleteContact(contact: ContactEntity)

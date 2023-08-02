@@ -16,20 +16,19 @@ class AppRepositoryImpl @Inject constructor(
         return getContactDao.getContacts().map { it.toContact() }
     }
 
-    override suspend fun addContact(contact: Contact) {
+    override fun addContact(contact: Contact) {
         return getContactDao.insertContact(contact.toContactEntity())
     }
 
-    override suspend fun deleteContact(contact: Contact) {
+    override fun deleteContact(contact: Contact) {
         return getContactDao.deleteContact(contact.toContactEntity())
     }
 
-    override suspend fun deleteContacts() {
+    override fun deleteContacts() {
         return getContactDao.deleteContacts()
     }
 
-    override suspend fun updateContact(contact: Contact) {
-        Log.e("TAG", "updateContact: ${contact.toString()}", )
+    override fun updateContact(contact: Contact) {
         return getContactDao.updateContact(contact.toContactEntity())
     }
 }

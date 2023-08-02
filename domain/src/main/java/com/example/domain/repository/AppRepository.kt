@@ -5,8 +5,8 @@ import com.example.domain.models.Contact
 
 interface AppRepository {
     suspend fun getContacts() : List<Contact>
-    suspend fun addContact(contact: Contact)
-    suspend fun deleteContact(contact: Contact)
-    suspend fun deleteContacts()
-    suspend fun updateContact(contact: Contact)
+    fun addContact(contact: Contact)
+    fun deleteContact(contact: Contact)
+    fun deleteContacts()
+    fun updateContact(contact: Contact)
 }
