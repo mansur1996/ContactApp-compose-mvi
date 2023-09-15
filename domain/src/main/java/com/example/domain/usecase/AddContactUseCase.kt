@@ -15,7 +15,5 @@ class AddContactUseCase @Inject constructor(
     fun addContact(contact: Contact): Flow<Result<Unit>> = flow {
         val response = appRepository.addContact(contact)
         emit(Result.success(response))
-    }.catch {
-        emit(Result.failure(Exception(it)))
     }.flowOn(Dispatchers.IO)
 }

@@ -15,7 +15,5 @@ class DeleteContactUseCase @Inject constructor(
     fun deleteContact(contact: Contact): Flow<Result<Unit>> = flow {
         val response = appRepository.deleteContact(contact)
         emit(Result.success(response))
-    }.catch {
-        emit(Result.failure(Exception(it)))
     }.flowOn(Dispatchers.IO)
 }

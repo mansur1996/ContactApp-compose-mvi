@@ -15,7 +15,5 @@ class UpdateContactUseCase @Inject constructor(
     fun updateContacts(contact: Contact): Flow<Result<Unit>> = flow {
         val response = appRepository.updateContact(contact)
         emit(Result.success(response))
-    }.catch {
-        emit(Result.failure(Exception(it)))
     }.flowOn(Dispatchers.IO)
 }

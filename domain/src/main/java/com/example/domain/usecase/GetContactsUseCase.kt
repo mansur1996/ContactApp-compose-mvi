@@ -15,7 +15,5 @@ class GetContactsUseCase @Inject constructor(
     fun getContacts(): Flow<Result<List<Contact>>> = flow {
         val response = appRepository.getContacts()
         emit(Result.success(response))
-    }.catch {
-        emit(Result.failure(Exception(it)))
     }.flowOn(Dispatchers.IO)
 }
